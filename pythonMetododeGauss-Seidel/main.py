@@ -1,0 +1,17 @@
+import numpy as np        #Gauss-Seidel
+A=np.array([[7,1,-1,2],[1,8,0,-2],[-1,0,4,-1],[2,-2,-1,6]])
+b=np.array([3,-5,4,-3])
+k=8
+n=A.shape[1]
+D=np.eye(n)      # Matriz Identidad
+D[np.arange(n),np.arange(n)]=A[np.arange(n),np.arange(n)]  # Matriz Diagonal
+LU=D-A
+L=np.tril(LU)
+U=np.triu(LU)
+DL=D-L
+x=np.zeros(n)
+print(" ",0,"Vector Inicial:",x)
+for i in range (k):
+    DL_inv=np.linalg.inv(DL)
+    x=np.dot(np.dot(DL_inv,U),x)+np.dot(DL_inv,b)
+    print(" ",i+1,"El resultado de iterar es:",x.round(decimals=4))
